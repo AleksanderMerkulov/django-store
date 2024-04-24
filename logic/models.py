@@ -10,7 +10,7 @@ class Buyer(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length='100', verbose_name='Название категории', default='')
+    name = models.CharField(max_length=100, verbose_name='Название категории', default='')
 
 
 class Fiz_lico(models.Model):
