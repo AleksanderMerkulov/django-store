@@ -1,11 +1,12 @@
 from django.contrib.admin.models import LogEntry
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
-from logic.forms import changeInfoForm
+from logic.forms import changeInfoForm, buyTovar
 from logic.models import Tovar, Buyer
 
 
@@ -66,3 +67,25 @@ def show_logs(request):
         return render(request, "pages/logs.html", {'logs': logs})
     else:
         return render(request, 'pages/not_allowed.html')
+
+
+def show_curr_tovar(request, pk):
+    tovar = get_object_or_404(Tovar, id=pk)
+    return render(request, 'pages/curr_tovar.html', {'tovar': tovar})
+
+
+@login_required
+def buy_curr_tovar(request, pk):
+    tovar = get_object_or_404(Tovar, id=pk)
+    if request.method == "GET":
+        form = buyTovar()
+        return render(request, 'forms/form.html', {'form': form,
+                                                   'tovar': tovar})
+    if request.method == "POST":
+        form = buyTovar(request.POST)
+        n_form = form.save(commit=False)
+        n_form.buyer_id = request.user.id
+        n_form.tovar_id = int(pk)
+        n_form.total_price = n_form.count * tovar.price
+        n_form.save()
+        return redirect(f'/product/{pk}')

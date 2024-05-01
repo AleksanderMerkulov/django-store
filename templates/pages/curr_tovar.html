@@ -1,0 +1,8 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h4>{{ tovar.name }}</h4>
+    <h5>Цена: {{ tovar.price }} рублей</h5>
+    <div>Остаток на складе: {{ tovar.count }}</div>
+    <a href="/buy/{{ tovar.id }}" class="btn">Купить</a>
+{% endblock %}

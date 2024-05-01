@@ -7,3 +7,9 @@ class changeInfoForm(forms.ModelForm):
         model = Buyer
         fields = '__all__'
         exclude = ['person']
+
+
+class buyTovar(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['count']
