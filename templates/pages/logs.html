@@ -1,0 +1,29 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <table>
+        <thead>
+        <tr>
+            <td>user</td>
+            <td>content_type</td>
+            <td>object_id</td>
+            <td>object_repr</td>
+            <td>change_message</td>
+            <td>action_time</td>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for log in logs %}
+            <tr>
+                <td>{{ log.user }}</td>
+                <td>{{ log.content_type }}</td>
+                <td>{{ log.object_id }}</td>
+                <td>{{ log.object_repr }}</td>
+                <td>{{ log.change_message }}</td>
+                <td>{{ log.action_time }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

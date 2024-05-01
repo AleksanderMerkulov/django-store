@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-ddd
-</body>
-</html>
+{% extends 'index.html' %}
+
+{% block content %}
+    <div class="row">
+        {% for product in products %}
+            <div class="col-4">
+                <div class="product-item">
+                    <h4>{{ product.name }}</h4>
+                    <h5>Цена: {{ product.price }} рублей</h5>
+                    <div>Остаток на складе: {{ product.count }}</div>
+                    <div><a href="/product/{{ product.id }}">Подробнее</a></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

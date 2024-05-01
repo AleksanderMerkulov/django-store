@@ -1,7 +1,7 @@
 {% extends 'index.html' %}
 
 {% block content %}
-    <h3>Регистрация пассажира</h3>
+    <h3>Регистрация пользователя</h3>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}

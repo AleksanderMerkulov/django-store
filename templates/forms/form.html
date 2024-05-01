@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if err %}
+        <h3 style="color: red">{{ err }}</h3>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Внести изменения</button>
+    </form>
+{% endblock %}
+
