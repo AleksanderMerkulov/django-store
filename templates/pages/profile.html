@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <p>Логин: {{ request.user.username }}</p>
+    <p>ФИО: userInfo.FIO</p>
+    <p>Заказы:</p>
+    <div class="row">
+    {% for order in orders %}
+        <div class="col-4" style="border: 1px solid rgba(0,0,0,0.2)">
+            <div style="margin: 10px">
+                <div>Заказ {{ order.id }}. {{ order.tovar.name }}</div>
+                <div>Сумма{{ order.total_price }}({{ order.count }}шт)</div>
+                <div><a href="/order/{{ order.id }}">Чек заказа</a></div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+
+{% endblock %}

@@ -306,6 +306,7 @@ class Order(models.Model):
         tovar = Tovar.objects.get(id=self.tovar_id)
         tovar.count = tovar.count - self.count
         tovar.save()
+        self.total_price = self.count * tovar.price
         self.save_base(
             using=using,
             force_insert=force_insert,
